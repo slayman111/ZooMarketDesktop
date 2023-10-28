@@ -1,15 +1,12 @@
-﻿using System.Windows;
+﻿namespace ZooMarketDesktop.View;
 
-namespace ZooMarketDesktop.View
+/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class AuthorizationWindow
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class AuthorizationWindow : Window
+    public AuthorizationWindow()
     {
-        public AuthorizationWindow()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }
