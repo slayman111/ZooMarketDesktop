@@ -1,6 +1,6 @@
 ﻿namespace ZooMarketDesktop.DbService.Exception;
 
-public class EntityNotFound : System.Exception
+internal class EntityNotFound : System.Exception
 {
     public EntityNotFound() : base($"Сущность не найдена")
     {
