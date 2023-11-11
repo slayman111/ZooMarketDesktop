@@ -1,0 +1,35 @@
+﻿using System;
+using System.Globalization;
+using System.IO;
+using System.Windows.Data;
+using System.Windows.Media.Imaging;
+
+namespace ZooMarketDesktop.Core.Converter;
+
+internal class ByteArrayToBitmapImageConverter : IValueConverter
+{
+    public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is null) return new BitmapImage();
+
+        using var ms = new MemoryStream((value as byte[])!);
+        var image = new BitmapImage();
+        image.BeginInit();
+        image.CacheOption = BitmapCacheOption.OnLoad;
+        image.StreamSource = ms;
+        image.EndInit();
+
+        return image;
+    }
+
+    public object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        var stream = (value as BitmapImage)!.StreamSource;
+        byte[]? buffer = null;
+        if (stream is not { Length: > 0 }) return buffer;
+        using BinaryReader br = new BinaryReader(stream);
+        buffer = br.ReadBytes((int)stream.Length);
+
+        return buffer;
+    }
+}

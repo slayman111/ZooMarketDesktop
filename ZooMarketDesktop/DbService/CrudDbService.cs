@@ -6,11 +6,11 @@ using ZooMarketDesktop.DbService.Exception;
 
 namespace ZooMarketDesktop.DbService;
 
-internal class CrudService<TId, TEntity> : IDisposable where TEntity : class
+internal class CrudDbService<TId, TEntity> : IDisposable where TEntity : class
 {
     private readonly DbContext _context;
 
-    public CrudService(DbContext context) => _context = context;
+    public CrudDbService(DbContext context) => _context = context;
 
     public async Task<List<TEntity>> GetAllAsync() => await _context.Set<TEntity>().ToListAsync();
 

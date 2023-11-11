@@ -18,6 +18,8 @@ public class Product
 
     public int CreatedById { get; set; }
 
+    public byte[]? Image { get; set; }
+
     public virtual Brand Brand { get; set; } = null!;
 
     public virtual User CreatedBy { get; set; } = null!;
