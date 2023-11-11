@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using ZooMarketDesktop.Context;
 using ZooMarketDesktop.DbService.Exception;
 using ZooMarketDesktop.Model.Entity;
+using ZooMarketDesktop.Model.Entity.Context;
 
 namespace ZooMarketDesktop.DbService;
 

@@ -1,9 +1,8 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using ZooMarketDesktop.Model.Entity;
 
-namespace ZooMarketDesktop.Context;
+namespace ZooMarketDesktop.Model.Entity.Context;
 
 public partial class ZooMarketDbContext : DbContext
 {
