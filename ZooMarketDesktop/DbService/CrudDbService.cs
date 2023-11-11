@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using ZooMarketDesktop.DbService.Exception;
 
 namespace ZooMarketDesktop.DbService;
@@ -16,10 +17,12 @@ internal class CrudDbService<TId, TEntity> : IDisposable where TEntity : class
 
     public async Task<TEntity> GetAsync(TId id) => await FindByIdAsync(id);
 
-    public async Task CreateAsync(TEntity entity)
+    public async Task<TEntity> CreateAsync(TEntity entity)
     {
         var result = _context.Set<TEntity>().Add(entity);
         await _context.SaveChangesAsync();
+
+        return result.Entity;
     }
 
     public async Task UpdateAsync(TEntity entity)

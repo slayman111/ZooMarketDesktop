@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Threading;
+using ZooMarketDesktop.DbService;
 
 namespace ZooMarketDesktop
 {
@@ -10,6 +12,8 @@ namespace ZooMarketDesktop
     {
         public App()
         {
+            Task.Run(async () => await DbStartupService.EnsureCreatedAsync());
+
             Dispatcher.UnhandledException += OnDispatcherUnhandledException;
         }
 
