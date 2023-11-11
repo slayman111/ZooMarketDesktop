@@ -1,4 +1,4 @@
-﻿namespace ZooMarketDesktop.Core;
+﻿namespace ZooMarketDesktop.Core.Constant;
 
 internal enum RoleEnum
 {

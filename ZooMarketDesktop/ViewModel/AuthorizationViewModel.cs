@@ -1,8 +1,9 @@
 ﻿using System.Windows.Input;
 using ZooMarketDesktop.Command;
 using ZooMarketDesktop.Core;
+using ZooMarketDesktop.Core.Constant;
+using ZooMarketDesktop.Core.Exception;
 using ZooMarketDesktop.DbService;
-using ZooMarketDesktop.Exception;
 using ZooMarketDesktop.View;
 
 namespace ZooMarketDesktop.ViewModel;

@@ -1,4 +1,4 @@
-﻿namespace ZooMarketDesktop.Exception;
+﻿namespace ZooMarketDesktop.Core.Exception;
 
 internal class IncorrectAccessRightsException : System.Exception
 {
