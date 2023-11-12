@@ -12,7 +12,9 @@ namespace ZooMarketDesktop
     {
         public App()
         {
+#if DEBUG
             Task.Run(async () => await DbStartupService.EnsureCreatedAsync());
+#endif
 
             Dispatcher.UnhandledException += OnDispatcherUnhandledException;
         }

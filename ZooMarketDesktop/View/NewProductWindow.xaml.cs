@@ -1,8 +1,6 @@
-﻿using System.Windows;
+﻿namespace ZooMarketDesktop.View;
 
-namespace ZooMarketDesktop.View;
-
-public partial class NewProductWindow : Window
+public partial class NewProductWindow
 {
     public NewProductWindow()
     {
