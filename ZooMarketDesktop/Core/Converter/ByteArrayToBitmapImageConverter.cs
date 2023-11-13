@@ -8,7 +8,7 @@ namespace ZooMarketDesktop.Core.Converter;
 
 internal class ByteArrayToBitmapImageConverter : IValueConverter
 {
-    public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         if (value is null) return new BitmapImage();
 
@@ -22,7 +22,7 @@ internal class ByteArrayToBitmapImageConverter : IValueConverter
         return image;
     }
 
-    public object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) =>
         ToByteArray((value as BitmapImage)!);
 
     public static byte[]? ToByteArray(BitmapImage? image)

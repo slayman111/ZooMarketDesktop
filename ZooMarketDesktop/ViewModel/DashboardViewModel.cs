@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using ZooMarketDesktop.Command;
 using ZooMarketDesktop.Core;
@@ -24,9 +25,14 @@ internal class DashboardViewModel : BaseViewModel
 
     public ICommand SignOutCommand { get; private set; }
     public ICommand OpenNewProductWindowCommand { get; private set; }
+    public ICommand DeleteProductCommand { get; private set; }
 
     public DashboardViewModel()
     {
+        SignOutCommand = new DelegateCommand(SignOut);
+        OpenNewProductWindowCommand = new DelegateCommand(OpenNewProductWindow);
+        DeleteProductCommand = new DelegateCommand(DeleteProduct);
+
         User = CurrentUser.User;
 
         Task.Run(async () =>
@@ -36,9 +42,19 @@ internal class DashboardViewModel : BaseViewModel
 
             Products = new ObservableCollection<Product>(await productService.GetAllAsync());
         });
+    }
 
-        SignOutCommand = new DelegateCommand(SignOut);
-        OpenNewProductWindowCommand = new DelegateCommand(OpenNewProductWindow);
+    private async void DeleteProduct(object id)
+    {
+        if (MessageBox.Show("Вы уверены что хотите удалить товар?", "Удаление", MessageBoxButton.YesNo) !=
+            MessageBoxResult.Yes) return;
+
+        await using var context = new ZooMarketDbContext();
+        using var productService = new CrudDbService<int, Product>(context);
+
+        await productService.DeleteAsync((int)id);
+
+        Products = new ObservableCollection<Product>(await productService.GetAllAsync());
     }
 
     private static void SignOut(object obj)
