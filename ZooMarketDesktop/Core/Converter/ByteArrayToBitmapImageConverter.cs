@@ -22,14 +22,19 @@ internal class ByteArrayToBitmapImageConverter : IValueConverter
         return image;
     }
 
-    public object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        var stream = (value as BitmapImage)!.StreamSource;
-        byte[]? buffer = null;
-        if (stream is not { Length: > 0 }) return buffer;
-        using BinaryReader br = new BinaryReader(stream);
-        buffer = br.ReadBytes((int)stream.Length);
+    public object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
+        ToByteArray((value as BitmapImage)!);
 
-        return buffer;
+    public static byte[]? ToByteArray(BitmapImage? image)
+    {
+        if (image is null) return null;
+
+        var encoder = new JpegBitmapEncoder();
+        encoder.Frames.Add(BitmapFrame.Create(image));
+
+        using var ms = new MemoryStream();
+        encoder.Save(ms);
+
+        return ms.ToArray();
     }
 }

@@ -3,10 +3,112 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:ZooMarketDesktop.View"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:viewModel="clr-namespace:ZooMarketDesktop.ViewModel"
     mc:Ignorable="d"
-    Title="NewProductWindow" Height="450" Width="800">
+    Title="ZooMarket" Height="750" Width="800"
+    WindowStartupLocation="CenterScreen">
+
+    <Window.DataContext>
+        <viewModel:NewProductViewModel />
+    </Window.DataContext>
+
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            Grid.ColumnSpan="2"
+            Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+            Text="Добавить товар"
+            TextAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="White"
+            Background="{StaticResource PrimaryHueLightBrush}" />
+
+        <StackPanel Grid.Row="1" Margin="20" VerticalAlignment="Center">
+            <TextBox
+                FontSize="18"
+                materialDesign:HintAssist.Hint="Название"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                Text="{Binding Name}"
+                VerticalAlignment="Center" />
+
+            <TextBox
+                TextWrapping="Wrap"
+                VerticalAlignment="Stretch"
+                MinWidth="280"
+                AcceptsReturn="True"
+                Margin="0,20,0,0"
+                VerticalScrollBarVisibility="Auto"
+                materialDesign:HintAssist.Hint="Описание"
+                Text="{Binding Description}"
+                Height="80" />
+
+            <ComboBox
+                FontSize="18"
+                SelectedItem="{Binding SelectedBrand}"
+                ItemsSource="{Binding Brands}"
+                DisplayMemberPath="Name"
+                Style="{StaticResource MaterialDesignFilledComboBox}"
+                Margin="0,20,0,0"
+                materialDesign:HintAssist.Hint="Бренд" />
+
+            <TextBox
+                FontSize="18"
+                Margin="0,20,0,0"
+                materialDesign:HintAssist.Hint="Количество"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                Text="{Binding Amount}"
+                VerticalAlignment="Center" />
+
+            <ComboBox
+                FontSize="18"
+                SelectedItem="{Binding SelectedProductType}"
+                ItemsSource="{Binding ProductTypes}"
+                DisplayMemberPath="Name"
+                Margin="0,20,0,0"
+                Style="{StaticResource MaterialDesignFilledComboBox}"
+                materialDesign:HintAssist.Hint="Тип товара" />
+
+            <TextBox
+                FontSize="18"
+                Margin="0,20,0,0"
+                materialDesign:HintAssist.Hint="Цена"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                Text="{Binding Price}"
+                VerticalAlignment="Center" />
+
+            <StackPanel Orientation="Horizontal" Margin="1,20,1,0">
+                <Button
+                    VerticalAlignment="Center"
+                    ToolTip="MaterialDesignFloatingActionMiniDarkButton"
+                    Command="{Binding ChooseImageCommand}">
+                    <materialDesign:PackIcon Kind="File" />
+                </Button>
+
+                <TextBlock
+                    Style="{StaticResource MaterialDesignBody1TextBlock}"
+                    Margin="20,0,0,0"
+                    Text="{Binding FilePath}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,20">
+                <Button
+                    Style="{StaticResource MaterialDesignFlatLightBgButton}"
+                    Command="{Binding OpenDashboardWindowCommand}"
+                    Content="Назад"
+                    Width="180"
+                    Margin="0,0,25,0" />
+                <Button
+                    Style="{StaticResource MaterialDesignFlatLightBgButton}"
+                    Command="{Binding AddProductCommand}"
+                    Content="Добавить"
+                    Width="180"
+                    IsDefault="True" />
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>

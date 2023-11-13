@@ -49,7 +49,6 @@ internal class DashboardViewModel : BaseViewModel
 
     private static void OpenNewProductWindow(object obj)
     {
-        CurrentUser.Reset();
         WindowManager.Open<NewProductWindow, DashboardWindow>();
     }
 }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using ZooMarketDesktop.DbService.Exception;
 
 namespace ZooMarketDesktop.DbService;
@@ -40,8 +39,5 @@ internal class CrudDbService<TId, TEntity> : IDisposable where TEntity : class
     private async Task<TEntity> FindByIdAsync(TId id) =>
         await _context.FindAsync<TEntity>(id) ?? throw new EntityNotFound();
 
-    public void Dispose()
-    {
-        _context.Dispose();
-    }
+    public void Dispose() => _context.Dispose();
 }

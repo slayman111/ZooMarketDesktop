@@ -26,11 +26,11 @@ internal static class DbStartupService
 
         var adminRole = await roleService.CreateAsync(new Role
         {
-            Name = RoleEnum.ADMIN.ToString()
+            Name = RoleEnum.Admin.ToString()
         });
         await roleService.CreateAsync(new Role
         {
-            Name = RoleEnum.USER.ToString()
+            Name = RoleEnum.User.ToString()
         });
 
         await userService.CreateAsync(new User

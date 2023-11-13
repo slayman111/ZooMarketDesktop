@@ -27,7 +27,7 @@ internal class AuthorizationViewModel : BaseViewModel
     {
         var user = await AuthorizationService.LoginAsync(Login, Password);
 
-        if (user.Role.Name != RoleEnum.ADMIN.ToString()) throw new IncorrectAccessRightsException();
+        if (user.Role.Name != RoleEnum.Admin.ToString()) throw new IncorrectAccessRightsException();
 
         CurrentUser.User = user;
         WindowManager.Open<DashboardWindow, AuthorizationWindow>();

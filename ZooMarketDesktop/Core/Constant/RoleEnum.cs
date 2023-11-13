@@ -2,6 +2,6 @@
 
 internal enum RoleEnum
 {
-    ADMIN,
-    USER
+    Admin,
+    User
 }
